@@ -1,0 +1,42 @@
+import java.util.*;
+
+class Solution {
+    //javac Solution.javac
+    //java Solution
+   
+    public static class pair {
+        String word;
+        int wordFrequency;
+        public pair(String word,int wordFrequency){
+            this.word=word;
+            this.wordFrequency=wordFrequency;
+        }
+    }
+   
+    public static void wordFrequency(String sentence){
+       
+        Map<String,Integer>map=new HashMap<>();
+        for(String str:sentence.split(" ")){
+            map.put(str,map.getOrDefault(str,0)+1);
+        }
+       
+        List<pair>allWords=new ArrayList<>();
+        for(String str:map.keySet()){
+            allWords.add(new pair(str,map.get(str)));
+        }
+       
+        Collections.sort(allWords,new Comparator<pair>(){
+            public int compare(pair p1,pair p2){
+                return p2.wordFrequency-p1.wordFrequency;
+            }
+        });
+       
+        for(pair p:allWords){
+            System.out.println(p.wordFrequency+" "+p.word);
+        }
+       
+    }
+    public static void main(String args[]){
+            wordFrequency("the cat is in the bag");
+    }
+}
